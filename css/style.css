@@ -1,0 +1,11 @@
+#body {
+    padding: 5%;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+div[class^="card"] {
+    color: black;
+}
