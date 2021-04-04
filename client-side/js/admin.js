@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     function buildMovieForm() {
         const form = [
-            "<form method='POST' action='/movie'>",
+            "<form method='POST' action='" + ROOT + "movie'>",
             "   <div class='mb-3'>",
             "      <label for='input-title' class='form-label'>Title</label>",
             "      <input type='text' class='form-control' id='input-title' name='title'>",
@@ -23,7 +23,7 @@ $(document).ready(function () {
             "   </div>",
             "   <div class='mb-3'>",
             "      <label for='input-date' class='form-label'>Release Date</label>",
-            "      <input type='text' class='form-control' id='input-date' name='date'>",
+            "      <input type='text' class='form-control' id='input-date' name='release_date'>",
             "   </div>",
             "   <div class='mb-3'>",
             "      <label for='input-category' class='form-label'>Category</label>",
@@ -35,7 +35,7 @@ $(document).ready(function () {
             "   </div>",
             "   <div class='mb-3'>",
             "      <label for='input-description' class='form-label'>Description</label>",
-            "      <textarea type='text' class='form-control' id='input-description' name='description' rows='3'></textarea>",
+            "      <textarea type='text' class='form-control' id='input-description' name='desc' rows='3'></textarea>",
             "   </div>",
             "   <button type='submit' class='btn btn-primary'>Submit</button>",
             "</form>"

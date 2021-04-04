@@ -6,15 +6,15 @@ $(document).ready(function () {
         "Video Games": "game"
     }
 
-    function buildCard(title, year, description) {
+    function buildCard(category, row) {
         const card = [
             "<br/>",
-            "<a href='#'>",
+            "<a href='./" + category + ".html?id=" + row["id"] + "'>",
             "    <div class='card'>",
             "        <div class='card-body'>",
-            "            <h5 class='card-title'>" + title + "</h5>",
-            "            <h6 class='card-subtitle mb-2 text-muted'>" + year + "</h6>",
-            "            <p class='card-text'>" + description + "</p>",
+            "            <h5 class='card-title'>" + row["title"] + "</h5>",
+            "            <h6 class='card-subtitle mb-2 text-muted'>" + row["release_date"] + "</h6>",
+            "            <p class='card-text'>" + row["description"] + "</p>",
             "        </div>",
             "    </div>",
             "</a>"
@@ -24,23 +24,15 @@ $(document).ready(function () {
 
     function buildPage(category) {
         $("#cards").empty();
-        for (let i = 0; i < 5; i++) {
-            $("#cards").append(buildCard("Movie " + i, "200" + i, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum metus lacus, eu scelerisque lectus facilisis id. Aenean aliquam turpis et pulvinar molestie."));
-        }
         const xhttp = new XMLHttpRequest();
-        console.log(ROOT + category);
         xhttp.open("GET", ROOT + category, true)
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 const rows = JSON.parse(xhttp.responseText);
                 for (const row in rows) {
-                    console.log(row);
-                    $("#cards").append(buildCard(
-                        row["title"],
-                        row["year"],
-                        row["description"]
-                    ));
+                    console.log(rows[row]);
+                    $("#cards").append(buildCard(category, rows[row]));
                 }
             }
         }
