@@ -1,11 +1,8 @@
 $(document).ready(function () {
     const ROOT = "https://rachellaurat.com/api/v1/";
-    const CATEGORIES = {
-        "Movies": "movie",
-        "TV Shows": "show",
-        "Video Games": "game"
-    }
+    const CATEGORIES = ["movie", "show", "game"];
 
+    // Build card element from row data
     function buildCard(category, row) {
         const card = [
             "<br/>",
@@ -22,24 +19,32 @@ $(document).ready(function () {
         return card;
     }
 
-    function buildPage(category) {
-        $("#cards").empty();
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("GET", ROOT + category, true)
-        xhttp.send();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                const rows = JSON.parse(xhttp.responseText);
-                for (const row in rows) {
-                    console.log(rows[row]);
-                    $("#cards").append(buildCard(category, rows[row]));
+    // GET from server
+    function buildPage() {
+        for (let i = 0; i < CATEGORIES.length; i++) {
+            const category = CATEGORIES[i];
+            console.log("Category: " + category);
+            const xhttp = new XMLHttpRequest();
+            console.log("GET: " + ROOT + category);
+            xhttp.open("GET", ROOT + category, true)
+            xhttp.send();
+            xhttp.onreadystatechange = () => {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    const rows = JSON.parse(xhttp.responseText);
+                    console.log(rows);
+                    if (rows.length < 1) {
+                        $("#" + category).append("There are no entries for this category.");
+                    } else {
+                        for (let i = 0; i < rows.length; i++) {
+                            const row = rows[i];
+                            console.log(row);
+                            $("#" + category).append(buildCard(category, row));
+                        }
+                    }
                 }
             }
         }
     }
 
-    $(".dropdown-menu li a").on("click", (value) => {
-        let category = CATEGORIES[value.target.innerHTML];
-        buildPage(category);
-    });
+    buildPage();
 });

@@ -1,9 +1,17 @@
-#body {
-    padding: 5%;
-}
-
 a {
     text-decoration: none !important;
+}
+
+#body, .tab-pane {
+    padding: 2.5%;
+}
+
+#category-tabs {
+    padding-top: 2.5%;
+}
+
+.nav-item {
+    margin-left: 5%;
 }
 
 div[class^="card"] {
