@@ -1,37 +1,58 @@
-$(document).ready(function () {
-    const ROOT = "https://rachellaurat.com/api/v1/";
+$(document).ready(() => {
 
     // Build table row element from row data
-    function buildRow(method, endpoint, count) {
-        const row = [
-            "<tr>",
-            "   <th scope='row'>" + method + "</th>",
-            "   <td>" + endpoint + "</td>",
-            "   <td>" + count + "</td>",
-            "</tr>"
-        ].join("\n");
-        return row;
+    const buildRow = (method, endpoint, count) => {
+        return "<tr>" +
+            "   <th scope='row'>" + method + "</th>" +
+            "   <td>" + endpoint + "</td>" +
+            "   <td>" + count + "</td>" +
+            "</tr>";
     }
 
-    // GET from server
-    function getEndpointStats() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("GET", ROOT + "admin", true)
-        xhttp.send();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                const rows = JSON.parse(xhttp.responseText);
-                for (const key of Object.keys(rows)) {
-                    const row = rows[key];
+    // GET endpoint stats
+    const getEndpointStats = () => {
+        const XHTTP = new XMLHttpRequest();
+        XHTTP.open("GET", ROOT + "admin" + API_KEY, true)
+        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.send();
+        XHTTP.onreadystatechange = () => {
+            console.log(XHTTP.readyState);
+            if (XHTTP.readyState == 4 && XHTTP.status == 200) {
+                const ROWS = JSON.parse(XHTTP.responseText);
+                for (let i = 0; i < ROWS.length; i++) {
+                    const ROW = ROWS[i];
                     $("#endpoint-table-body").append(buildRow(
-                        row["method"],
-                        row["endpoint"],
-                        row["count"]
+                        ROW["method"],
+                        ROW["endpoint"],
+                        ROW["count"]
                     ));
                 }
             }
         }
     }
 
-    getEndpointStats();
+    // POST authentication form
+    const authenticate = (form) => {
+        const XHTTP = new XMLHttpRequest();
+        XHTTP.open("POST", ROOT + "login" + API_KEY, true);
+        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.send(form.serialize());
+        XHTTP.onreadystatechange = () => {
+            if (XHTTP.readyState == 4 && XHTTP.status == 200) {
+                getEndpointStats();
+                form.hide();                
+                $("#endpoint-table").show();                
+            } else if (XHTTP.readyState == 4 && XHTTP.status == 401) {
+                alert("Invalid credentials");
+                form[0].reset();
+            }
+        }
+    }
+
+    const FORM = $("#authentication-form");
+    
+    FORM.submit((e) => {
+        e.preventDefault();
+        authenticate(FORM);
+    });
 });

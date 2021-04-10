@@ -1,29 +1,27 @@
-$(document).ready(function () {
-    const ROOT = "https://rachellaurat.com/api/v1/";
+$(document).ready(() => {
 
-    // Set up form behaviour
-    function setUpForm(category) {
-        $("#new-" + category + "-form").attr("action", ROOT + category);
-
-        const form = $("#new-" + category + "-form");
-        $("#" + category + "-submit").click(() => {   
-            $.ajax({
-                type: form.attr("method"),
-                url: form.attr("action"),
-                data: form.serialize(),
-                success: () => {
-                    alert("Item added");
-                    window.location.reload();
-                },
-                error: () => {
-                    alert("Error adding item");
-                }
-            });
-            return false;
-        });
+    // POST item
+    const submitForm = (form, category) => {
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("POST", ROOT + category, true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(form.serialize());
+        xhttp.onreadystatechange = () => {
+            console.log(xhttp.status);
+            if (xhttp.readyState == 4 && xhttp.status == 201) {
+                alert("Added " + category);
+                form[0].reset();
+            }
+        }
     }
 
-    setUpForm("movie");
-    setUpForm("show");
-    setUpForm("game");
+    for (let i = 0; i < CATEGORIES.length; i++) {
+        const category = CATEGORIES[i];
+        const form = $("#new-" + category + "-form");
+
+        form.submit((e) => {
+            e.preventDefault();
+            submitForm(form, category);
+        });
+    }
 });
