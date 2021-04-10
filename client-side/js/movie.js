@@ -75,8 +75,8 @@ $(document).ready(function () {
     buildPage(id);
 
     form.attr("action", ROOT + "movie/review/" + id);
+
     $("#form-submit").click(() => {   
-        console.log(form.serialize());
         $.ajax({
             type: form.attr("method"),
             url: form.attr("action"),
@@ -85,8 +85,8 @@ $(document).ready(function () {
                 alert("Review submitted");
                 window.location.reload();
             },
-            error: (err) => {
-                console.log(err);
+            error: () => {
+                alert("Error submitting review");
             }
         });
         return false;

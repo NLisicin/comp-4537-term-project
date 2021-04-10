@@ -34,8 +34,4 @@ $(document).ready(function () {
     }
 
     getEndpointStats();
-
-    $("#new-movie-form").attr("action", ROOT + "movie");
-    $("#new-show-form").attr("action", ROOT + "show");
-    $("#new-game-form").attr("action", ROOT + "game");
 });

@@ -22,6 +22,9 @@
                         <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./addItem.html">Add an Item</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./admin.html">Admin</a>
                     </li>
                 </ul>
@@ -40,115 +43,11 @@
             </thead>
             <tbody id="endpoint-table-body"></tbody>
         </table>
+    </div>
 
-        <br />
-
-        <h4>Add an Item</h4>
-        <ul class="nav nav-tabs nav-fill" id="category-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#movie" type="button" role="tab" aria-controls="movies" aria-selected="true">Movie</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#show" type="button" role="tab" aria-controls="shows" aria-selected="false">TV Show</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#game" type="button" role="tab" aria-controls="games" aria-selected="false">Video Game</button>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="category-tab-content">
-
-            <div class="tab-pane fade show active" id="movie" role="tabpanel">
-                <form id="new-movie-form" method="POST">
-                    <div class="mb-3">
-                        <label for="input-title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="input-title" name="title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-director" class="form-label">Director</label>
-                        <input type="text" class="form-control" id="input-director" name="director">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-writer" class="form-label">Writer</label>
-                        <input type="text" class="form-control" id="input-writer" name="writer">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-date" class="form-label">Release Date</label>
-                        <input type="text" class="form-control" id="input-date" name="release_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-category" class="form-label">Category</label>
-                        <input type="text" class="form-control" id="input-category" name="category">
-                    </div>
-                    <div class="mb-3">
-                        <label for="runinput-time" class="form-label">Runtime</label>
-                        <input type="text" class="form-control" id="input-runtime" name="runtime">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-description" class="form-label">Description</label>
-                        <textarea type="text" class="form-control" id="input-description" name="desc" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-
-            <div class="tab-pane fade" id="show" role="tabpanel">
-                <form id="new-show-form" method="POST">
-                    <div class="mb-3">
-                        <label for="input-title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="input-title" name="title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-director" class="form-label">Director</label>
-                        <input type="text" class="form-control" id="input-director" name="director">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-writer" class="form-label">Writer</label>
-                        <input type="text" class="form-control" id="input-writer" name="writer">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-date" class="form-label">Release Date</label>
-                        <input type="text" class="form-control" id="input-date" name="release_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-category" class="form-label">Seasons</label>
-                        <input type="text" class="form-control" id="input-category" name="seasons">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-description" class="form-label">Description</label>
-                        <textarea type="text" class="form-control" id="input-description" name="desc" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-
-            <div class="tab-pane fade" id="game" role="tabpanel">
-                <form id="new-game-form" method="POST">
-                    <div class="mb-3">
-                        <label for="input-name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="input-name" name="name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-creator" class="form-label">Creator</label>
-                        <input type="text" class="form-control" id="input-creator" name="creator">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-date" class="form-label">Release Date</label>
-                        <input type="text" class="form-control" id="input-date" name="release_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="input-description" class="form-label">Description</label>
-                        <textarea type="text" class="form-control" id="input-description" name="desc" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="./js/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/admin.js"></script>
 </body>
 
 </html>
