@@ -2,12 +2,12 @@ $(document).ready(() => {
 
     // POST item
     const submitForm = (form, category) => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", ROOT + category + API_KEY, true);
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(form.serialize());
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 201) {
+        const XHTTP = new XMLHttpRequest();
+        XHTTP.open("POST", ROOT + category + API_KEY, true);
+        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.send(form.serialize());
+        XHTTP.onreadystatechange = () => {
+            if (XHTTP.readyState == 4 && XHTTP.status == 201) {
                 alert("Added " + category);
                 form[0].reset();
             }
@@ -15,12 +15,14 @@ $(document).ready(() => {
     }
 
     for (let i = 0; i < CATEGORIES.length; i++) {
-        const category = CATEGORIES[i];
-        const form = $("#new-" + category + "-form");
+        const CATEGORY = CATEGORIES[i];
+        const FORM = $("#new-" + CATEGORY + "-form");
 
-        form.submit((e) => {
+        const SUBMIT_HANDLER = FORM.submit((e) => {
             e.preventDefault();
-            submitForm(form, category);
+            submitForm(FORM, CATEGORY);
         });
+
+        FORM.validate(validationRules(SUBMIT_HANDLER));
     }
 });

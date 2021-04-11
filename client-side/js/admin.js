@@ -17,8 +17,10 @@ $(document).ready(() => {
         XHTTP.onreadystatechange = () => {
             if (XHTTP.readyState == 4 && XHTTP.status == 200) {
                 const ROWS = JSON.parse(XHTTP.responseText);
+                console.log(ROWS);
                 for (let i = 0; i < ROWS.length; i++) {
                     const ROW = ROWS[i];
+                    console.log(ROW);
                     $("#endpoint-table-body").append(buildRow(
                         ROW["method"],
                         ROW["endpoint"],
@@ -36,6 +38,8 @@ $(document).ready(() => {
         XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         XHTTP.send(form.serialize());
         XHTTP.onreadystatechange = () => {
+            console.log(XHTTP.readyState);
+            console.log(XHTTP.status);
             if (XHTTP.readyState == 4 && XHTTP.status == 200) {
                 getEndpointStats();
                 form.hide();                

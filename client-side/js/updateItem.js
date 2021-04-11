@@ -43,10 +43,12 @@ $(document).ready(() => {
 
     buildPage(FORM, CATEGORY, ID);
     
-    FORM.submit((e) => {
+    const SUBMIT_HANDLER = FORM.submit((e) => {
         e.preventDefault();
         submitForm(FORM, CATEGORY, ID);
     });
+
+    FORM.validate(validationRules(SUBMIT_HANDLER));
 
     $("[id$='-cancel']").click(() => window.history.back());
 });
