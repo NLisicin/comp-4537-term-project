@@ -98,7 +98,7 @@ app.get(REQUEST_ROOT + "admin", (req, res) => {
             throw new HTTPError(UNAUTH_CODE, API_ERROR_MESSAGE);
         }
     }).then((result) => {
-        res.status(SUCCESS_CODE).send(result[0]);
+        res.status(SUCCESS_CODE).send(result);
     }).catch((err) => {
         res.status(err.code).send(err.message);
     });
@@ -518,32 +518,6 @@ app.put(REQUEST_ROOT + "game/:id", (req, res) => {
     });
 });
 
-app.put(REQUEST_ROOT + "review/:id", (req, res) => {
-    let apiKey = req.query.apiKey;
-    const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
-    connection.promise(check_key).then((result) => {
-        if (result.length > 0) {
-            if (!Number.isInteger(parseInt(req.params.id))) {
-                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
-            }
-            let q = `UPDATE Review SET user_name='${req.body.user_name}', rating='${req.body.rating}', review='${req.body.review}' WHERE id='${req.params.id}';`;
-            let count = `UPDATE endpointCounts SET count=count+1 WHERE method='PUT' AND endpoint='/review/{id}';`;
-            return connection.promise(q + count).then((result) => {
-                if (result[0].affectedRows === 0) {
-                    throw new HTTPError(NOT_FOUND_CODE, NOT_FOUND_MESSAGE);
-                }
-                return result;
-            });
-        } else {
-            throw new HTTPError(UNAUTH_CODE, API_ERROR_MESSAGE);
-        }
-    }).then((result) => {
-        res.status(SUCCESS_CODE).send(UPDATE_MESSAGE);
-    }).catch((err) => {
-        res.status(err.code).send(err.message);
-    });
-});
-
 app.delete(REQUEST_ROOT + "movie/:id", (req, res) => {
     let apiKey = req.query.apiKey;
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
@@ -625,35 +599,6 @@ app.delete(REQUEST_ROOT + "game/:id", (req, res) => {
         res.status(err.code).send(err.message);
     });
 });
-
-app.delete(REQUEST_ROOT + "review/:id", (req, res) => {
-    let apiKey = req.query.apiKey;
-    const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
-    connection.promise(check_key).then((result) => {
-        console.log("RESULT");
-        console.log(result);
-        if (result.length > 0) {
-            if (!Number.isInteger(parseInt(req.params.id))) {
-                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
-            }
-            let q = `DELETE FROM Review WHERE id=${req.params.id};`;
-            let count = `UPDATE endpointCounts SET count=count+1 WHERE method='DELETE' AND endpoint='/review/{id}';`;
-            return connection.promise(q + count).then((result) => {
-                if (result[0].affectedRows === 0) {
-                    throw new HTTPError(NOT_FOUND_CODE, NOT_FOUND_MESSAGE);
-                }
-                return result;
-            });
-        } else {
-            throw new HTTPError(UNAUTH_CODE, API_ERROR_MESSAGE);
-        }
-    }).then((result) => {
-        res.status(SUCCESS_CODE).send(DELETE_MESSAGE);
-    }).catch((err) => {
-        res.status(err.code).send(err.message);
-    });
-});
-
 
 app.listen(PORT, (err) => {
     if(err) throw err;
