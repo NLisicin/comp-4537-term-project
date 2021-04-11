@@ -13,12 +13,14 @@ const CREATE_CODE = 201;
 const SUCCESS_CODE = 200;
 const UNAUTH_CODE = 401;
 const NOT_FOUND_CODE = 404;
+const INVALID_CODE = 400;
 
 const CREATE_MESSAGE = "successfully created resource";
 const UPDATE_MESSAGE = "successfully updated resource";
 const DELETE_MESSAGE = "successfully deleted resource";
 const API_ERROR_MESSAGE = "API Key Error";
-const NOT_FOUND_MESSAGE = "Requested resource does not exist"
+const NOT_FOUND_MESSAGE = "Requested resource does not exist";
+const INVALID_MESSAGE = "Invalid ID";
 
 class HTTPError extends Error {
     constructor(code, message) {
@@ -163,7 +165,10 @@ app.get(REQUEST_ROOT + "movie/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
-            let q = `SELECT * FROM Movie WHERE id='${req.params.id}';`;
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
+            let q = `SELECT * FROM Movie WHERE id=${req.params.id};`;
             let count = "UPDATE `endpointCounts` SET count=count+1 WHERE method='GET' AND endpoint='/movie/{id}';";
             return connection.promise(q + count).then((result) => {
                 if (result[0].length === 0) {
@@ -186,6 +191,9 @@ app.get(REQUEST_ROOT + "show/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `SELECT * FROM TVShow WHERE id='${req.params.id}';`;
             let count = "UPDATE `endpointCounts` SET count=count+1 WHERE method='GET' AND endpoint='/show/{id}';";
             return connection.promise(q + count).then((result) => {
@@ -209,6 +217,9 @@ app.get(REQUEST_ROOT + "game/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `SELECT * FROM Game WHERE id='${req.params.id}';`;
             let count = "UPDATE `endpointCounts` SET count=count+1 WHERE method='GET' AND endpoint='/game/{id}';";
             return connection.promise(q + count).then((result) => {
@@ -232,6 +243,9 @@ app.get(REQUEST_ROOT + "movie/review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `SELECT * FROM Review WHERE movie_id=${req.params.id};`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='GET' AND endpoint='/movie/review/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -255,6 +269,9 @@ app.get(REQUEST_ROOT + "game/review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `SELECT * FROM Review WHERE game_id=${req.params.id};`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='GET' AND endpoint='/game/review/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -278,6 +295,9 @@ app.get(REQUEST_ROOT + "show/review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `SELECT * FROM Review WHERE show_id=${req.params.id};`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='GET' AND endpoint='/show/review/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -358,6 +378,9 @@ app.post(REQUEST_ROOT + "movie/review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `INSERT INTO Review (user_name, movie_id, rating, review) VALUES ('${req.body.user_name}', '${req.params.id}', '${req.body.rating}', '${req.body.review}');`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='POST' AND endpoint='/movie/review/{id}';`;
             return connection.promise(q + count);
@@ -377,6 +400,9 @@ app.post(REQUEST_ROOT + "show/review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `INSERT INTO Review (user_name, show_id, rating, review) VALUES ('${req.body.user_name}', '${req.params.id}', '${req.body.rating}', '${req.body.review}');`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='POST' AND endpoint='/show/review/{id}';`;
             return connection.promise(q + count);
@@ -396,6 +422,9 @@ app.post(REQUEST_ROOT + "game/review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `INSERT INTO Review (user_name, game_id, rating, review) VALUES ('${req.body.user_name}', '${req.params.id}', '${req.body.rating}', '${req.body.review}');`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='POST' AND endpoint='/game/review/{id}';`;
             return connection.promise(q + count);
@@ -414,6 +443,9 @@ app.put(REQUEST_ROOT + "movie/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `UPDATE Movie SET title='${req.body.title}', director='${req.body.director}', writer='${req.body.writer}', release_date='${req.body.release_date}', category='${req.body.category}', runtime='${req.body.runtime}', description='${req.body.desc}' WHERE id='${req.params.id}';`;
             let count = "UPDATE endpointCounts SET count=count+1 WHERE method='PUT' AND endpoint='/movie/{id}';";
             return connection.promise(q + count).then((result) => {
@@ -439,6 +471,9 @@ app.put(REQUEST_ROOT + "show/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `UPDATE TVShow SET title='${req.body.title}', director='${req.body.director}', seasons=${req.body.seasons}, release_date='${req.body.release_date}', description='${req.body.desc}' WHERE id=${req.params.id};`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='PUT' AND endpoint='/show/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -462,6 +497,9 @@ app.put(REQUEST_ROOT + "game/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `UPDATE Game SET title='${req.body.title}', creator='${req.body.creator}', description='${req.body.desc}', release_date='${req.body.release_date}' WHERE id=${req.params.id};`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='PUT' AND endpoint='/game/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -485,6 +523,9 @@ app.put(REQUEST_ROOT + "review/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `UPDATE Review SET user_name='${req.body.user_name}', rating='${req.body.rating}', review='${req.body.review}' WHERE id='${req.params.id}';`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='PUT' AND endpoint='/review/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -510,6 +551,9 @@ app.delete(REQUEST_ROOT + "movie/:id", (req, res) => {
         console.log("RESULT");
         console.log(result);
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             q = `DELETE FROM Movie WHERE id='${req.params.id}'; DELETE FROM Review WHERE movie_id='${req.params.id}';`;
             count = `UPDATE endpointCounts SET count=count+1 WHERE method='DELETE' AND endpoint='/movie/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -533,6 +577,9 @@ app.delete(REQUEST_ROOT + "show/:id", (req, res) => {
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `DELETE FROM Review WHERE show_id='${req.params.id}'; DELETE FROM TVShow WHERE id='${req.params.id}';`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='DELETE' AND endpoint='/show/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -558,6 +605,9 @@ app.delete(REQUEST_ROOT + "game/:id", (req, res) => {
         console.log("RESULT");
         console.log(result);
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `DELETE FROM Review WHERE game_id='${req.params.id}'; DELETE FROM Game WHERE id='${req.params.id}';`;
             let count = ` UPDATE endpointCounts SET count=count+1 WHERE method='DELETE' AND endpoint='/game/{id}';`;
             return connection.promise(q + count).then((result) => {
@@ -583,6 +633,9 @@ app.delete(REQUEST_ROOT + "review/:id", (req, res) => {
         console.log("RESULT");
         console.log(result);
         if (result.length > 0) {
+            if (!Number.isInteger(parseInt(req.params.id))) {
+                throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
+            }
             let q = `DELETE FROM Review WHERE id=${req.params.id};`;
             let count = `UPDATE endpointCounts SET count=count+1 WHERE method='DELETE' AND endpoint='/review/{id}';`;
             return connection.promise(q + count).then((result) => {
