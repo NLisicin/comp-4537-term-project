@@ -181,7 +181,7 @@ font-style: italic;
   <body>
   <h1>SHOOP API</h1>
     <div class="app-desc"><p>The following documentation outlines the API requests that can be made to interact with the media review database we created for the COMP 4537  final project.</p>
-<p>Rachel Laurat | A01168039 <br/>
+<p>Rachel Laurat | A01168039
 Nicholas Lisicin-Wilson | A01180339</p>
 </div>
     <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
@@ -271,8 +271,11 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">405</h4>
-    Invalid input
+    <h4 class="field-label">201</h4>
+    Resource successfully created
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -307,8 +310,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Game successfully deleted
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
     <h4 class="field-label">404</h4>
     Game not found
@@ -347,14 +356,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <pre class="example"><code>[ {
   "creator" : "creator",
   "release_date" : "release_date",
-  "name" : "name",
   "id" : 0,
+  "title" : "title",
   "desc" : "desc"
 }, {
   "creator" : "creator",
   "release_date" : "release_date",
-  "name" : "name",
   "id" : 0,
+  "title" : "title",
   "desc" : "desc"
 } ]</code></pre>
 
@@ -370,7 +379,13 @@ Nicholas Lisicin-Wilson | A01180339</p>
     successful operation
         
     <h4 class="field-label">400</h4>
-    Invalid status value
+    Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Game not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -400,14 +415,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <pre class="example"><code>[ {
   "creator" : "creator",
   "release_date" : "release_date",
-  "name" : "name",
   "id" : 0,
+  "title" : "title",
   "desc" : "desc"
 }, {
   "creator" : "creator",
   "release_date" : "release_date",
-  "name" : "name",
   "id" : 0,
+  "title" : "title",
   "desc" : "desc"
 } ]</code></pre>
 
@@ -422,8 +437,8 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <h4 class="field-label">200</h4>
     successful operation
         
-    <h4 class="field-label">400</h4>
-    Invalid status value
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -465,8 +480,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Resource successfully updated
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
     <h4 class="field-label">404</h4>
     Game not found
@@ -511,8 +532,11 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">405</h4>
-    Invalid input
+    <h4 class="field-label">201</h4>
+    Resource successfully created
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -547,8 +571,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Movie successfully deleted
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
     <h4 class="field-label">404</h4>
     Movie not found
@@ -616,7 +646,13 @@ Nicholas Lisicin-Wilson | A01180339</p>
     successful operation
         
     <h4 class="field-label">400</h4>
-    Invalid status value
+    Invalid ID
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    Movie not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -674,8 +710,8 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <h4 class="field-label">200</h4>
     successful operation
         
-    <h4 class="field-label">400</h4>
-    Invalid status value
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -710,8 +746,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Movie successfully updated
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
     <h4 class="field-label">404</h4>
     Movie not found
@@ -757,8 +799,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Resource successfully created
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -800,8 +848,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Resource successfully created
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -843,8 +897,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Resource successfully created
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -879,8 +939,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Review successfully deleted
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
     <h4 class="field-label">404</h4>
     Review not found
@@ -918,6 +984,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>[ {
   "show_id" : 1,
+  "user_name" : "user_name",
   "review" : "review",
   "rating" : 5,
   "id" : 0,
@@ -925,6 +992,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
   "game_id" : 5
 }, {
   "show_id" : 1,
+  "user_name" : "user_name",
   "review" : "review",
   "rating" : 5,
   "id" : 0,
@@ -944,7 +1012,10 @@ Nicholas Lisicin-Wilson | A01180339</p>
     successful operation
         
     <h4 class="field-label">400</h4>
-    Invalid status value
+    Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -979,6 +1050,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>[ {
   "show_id" : 1,
+  "user_name" : "user_name",
   "review" : "review",
   "rating" : 5,
   "id" : 0,
@@ -986,6 +1058,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
   "game_id" : 5
 }, {
   "show_id" : 1,
+  "user_name" : "user_name",
   "review" : "review",
   "rating" : 5,
   "id" : 0,
@@ -1005,7 +1078,10 @@ Nicholas Lisicin-Wilson | A01180339</p>
     successful operation
         
     <h4 class="field-label">400</h4>
-    Invalid status value
+    Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1040,6 +1116,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>[ {
   "show_id" : 1,
+  "user_name" : "user_name",
   "review" : "review",
   "rating" : 5,
   "id" : 0,
@@ -1047,6 +1124,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
   "game_id" : 5
 }, {
   "show_id" : 1,
+  "user_name" : "user_name",
   "review" : "review",
   "rating" : 5,
   "id" : 0,
@@ -1066,7 +1144,10 @@ Nicholas Lisicin-Wilson | A01180339</p>
     successful operation
         
     <h4 class="field-label">400</h4>
-    Invalid status value
+    Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1108,8 +1189,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Resource successfully updated
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
     <h4 class="field-label">404</h4>
     Review not found
@@ -1154,8 +1241,11 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
-    <h4 class="field-label">405</h4>
-    Invalid input
+    <h4 class="field-label">201</h4>
+    Resource successfully created
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1170,7 +1260,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <div class="field-items">
       <div class="param">id (required)</div>
 
-      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of tv show to delete format: int64</div>
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of TV show to delete format: int64</div>
     </div>  <!-- field-items -->
 
 
@@ -1190,11 +1280,17 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    TV show successfully deleted
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
         <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
+        <a href="#"></a>
     <h4 class="field-label">404</h4>
-    TV show not found
+    TV Show not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1259,7 +1355,13 @@ Nicholas Lisicin-Wilson | A01180339</p>
     successful operation
         
     <h4 class="field-label">400</h4>
-    Invalid status value
+    Invalid ID supplied
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Invalid API Key
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    TV Show not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1313,8 +1415,8 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <h4 class="field-label">200</h4>
     successful operation
         
-    <h4 class="field-label">400</h4>
-    Invalid status value
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1349,11 +1451,14 @@ Nicholas Lisicin-Wilson | A01180339</p>
     </ul>
 
     <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Resource successfully updated
+        <a href="#"></a>
     <h4 class="field-label">400</h4>
     Invalid ID supplied
         <a href="#"></a>
-    <h4 class="field-label">404</h4>
-    TV Show not found
+    <h4 class="field-label">401</h4>
+    Invalid API Key
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1374,7 +1479,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <div class='model-description'></div>
     <div class="field-items">
       <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
-<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
 <div class="param">creator (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
 <div class="param">release_date (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
 <div class="param">desc (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
@@ -1399,6 +1504,7 @@ Nicholas Lisicin-Wilson | A01180339</p>
     <div class='model-description'></div>
     <div class="field-items">
       <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">user_name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
 <div class="param">movie_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
 <div class="param">show_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
 <div class="param">game_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
