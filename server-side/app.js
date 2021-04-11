@@ -30,7 +30,7 @@ class HTTPError extends Error {
 }
  
 const connection = mysql.createConnection({
-    host: "45.79.138.240",
+    host: "localhost",
     user: "rachella_imdb",
     password: "",
     database: "rachella_imdb",
@@ -49,7 +49,7 @@ connection.promise = (sql) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "https://nlisicin.com");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
     next();
@@ -79,6 +79,9 @@ app.post(REQUEST_ROOT + "login", async (req, res) => {
             throw new HTTPError(UNAUTH_CODE, false);
         }
         const success = bcrypt.compareSync(req.body.password, result[0].password);
+        if (!success) {
+            throw new HTTPError(UNAUTH_CODE, false);
+        }
         return success;
     }).then((result) => {
         res.status(SUCCESS_CODE).send(result);
@@ -528,7 +531,7 @@ app.delete(REQUEST_ROOT + "movie/:id", (req, res) => {
             if (!Number.isInteger(parseInt(req.params.id))) {
                 throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
             }
-            q = `DELETE FROM Movie WHERE id='${req.params.id}'; DELETE FROM Review WHERE movie_id='${req.params.id}';`;
+            q = `DELETE FROM Review WHERE movie_id='${req.params.id}';DELETE FROM Movie WHERE id='${req.params.id}';`;
             count = `UPDATE endpointCounts SET count=count+1 WHERE method='DELETE' AND endpoint='/movie/{id}';`;
             return connection.promise(q + count).then((result) => {
                 if (result[1].affectedRows === 0) {
@@ -576,8 +579,6 @@ app.delete(REQUEST_ROOT + "game/:id", (req, res) => {
     let apiKey = req.query.apiKey;
     const check_key = `SELECT * FROM apiKey WHERE api_key='${apiKey}';`;
     connection.promise(check_key).then((result) => {
-        console.log("RESULT");
-        console.log(result);
         if (result.length > 0) {
             if (!Number.isInteger(parseInt(req.params.id))) {
                 throw new HTTPError(INVALID_CODE, INVALID_MESSAGE);
@@ -599,6 +600,8 @@ app.delete(REQUEST_ROOT + "game/:id", (req, res) => {
         res.status(err.code).send(err.message);
     });
 });
+
+
 
 app.listen(PORT, (err) => {
     if(err) throw err;
