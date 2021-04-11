@@ -22,7 +22,7 @@ $(document).ready(() => {
         return "<br />" +
             "<div class='card'>" +
             "    <div class='card-body'>" +
-            "        <h5 class='card-title'>" + review["name"] + "</h5>" +
+            "        <h5 class='card-title'>" + review["user_name"] + "</h5>" +
             "        <h6 class='card-subtitle'>" + STARS + "</h5>" +
             "        <p class='card-text'>" + review["review"] + "</p>" +
             "    </div>" +
@@ -31,8 +31,6 @@ $(document).ready(() => {
 
     // DELETE item
     const deleteItem = (category, id) => {
-        console.log(category);
-        console.log(id);
         if (confirm("WARNING: The " + category + " and its reviews will be deleted. Continue?")) {
             const XHTTP = new XMLHttpRequest();
             XHTTP.open("DELETE", ROOT + category + "/" + id + API_KEY, true)
@@ -83,10 +81,8 @@ $(document).ready(() => {
         XHTTP.open("GET", ROOT + category + "/review/" + id + API_KEY, true)
         XHTTP.send();
         XHTTP.onreadystatechange = () => {
-            console.log(XHTTP.readyState);
-            console.log(XHTTP.status);
             if (XHTTP.readyState == 4 && XHTTP.status == 200) {
-                const ROWS = JSON.parse(XHTTP.responseText)[0];
+                const ROWS = JSON.parse(XHTTP.responseText);
                 for (let i = 0; i < ROWS.length; i++) {
                     $("#reviews").append(buildReviewCard(ROWS[i]));
                 }
@@ -96,7 +92,6 @@ $(document).ready(() => {
 
     // GET item data
     const buildPage = (category, id) => {
-        console.log(category);
         const XHTTP = new XMLHttpRequest();
         XHTTP.open("GET", ROOT + category + "/" + id + API_KEY, true)
         XHTTP.send();

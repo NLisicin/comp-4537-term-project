@@ -3,11 +3,10 @@ $(document).ready(() => {
     // POST item
     const submitForm = (form, category) => {
         const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", ROOT + category, true);
+        xhttp.open("POST", ROOT + category + API_KEY, true);
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhttp.send(form.serialize());
         xhttp.onreadystatechange = () => {
-            console.log(xhttp.status);
             if (xhttp.readyState == 4 && xhttp.status == 201) {
                 alert("Added " + category);
                 form[0].reset();
