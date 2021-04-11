@@ -2,13 +2,12 @@ $(document).ready(() => {
 
     // PUT item
     const submitForm = (form, category, id) => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("PUT", ROOT + category + "/" + id + API_KEY, true);
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(form.serialize());
-        xhttp.onreadystatechange = () => {
-            console.log(xhttp.status);
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
+        const XHTTP = new XMLHttpRequest();
+        XHTTP.open("PUT", ROOT + category + "/" + id + API_KEY, true);
+        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.send(form.serialize());
+        XHTTP.onreadystatechange = () => {
+            if (XHTTP.readyState == 4 && XHTTP.status == 200) {
                 alert("Updated " + category);
                 window.location.replace("./item.html?category=" + category + "&id=" + id);
             }
@@ -16,8 +15,7 @@ $(document).ready(() => {
     }
 
     // GET item data
-    const buildPage = (category, id) => {
-        console.log(category);
+    const buildPage = (form, category, id) => {
         const XHTTP = new XMLHttpRequest();
         XHTTP.open("GET", ROOT + category + "/" + id + API_KEY, true)
         XHTTP.send();
@@ -31,6 +29,7 @@ $(document).ready(() => {
                         $("[name=" + key + "]").val(value);
                     }
                 });
+                form.show();
             } else if ((XHTTP.readyState == 4 && (XHTTP.status == 400 || XHTTP.status == 400))) {
                 $("#body").append("Invalid item ID.");
             }
@@ -42,9 +41,8 @@ $(document).ready(() => {
     const ID = PARAMS.get("id");
     const FORM = $("#update-" + CATEGORY + "-form");
 
-    buildPage(CATEGORY, ID);
+    buildPage(FORM, CATEGORY, ID);
     
-    FORM.show();
     FORM.submit((e) => {
         e.preventDefault();
         submitForm(FORM, CATEGORY, ID);

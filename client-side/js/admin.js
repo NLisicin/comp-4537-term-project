@@ -12,11 +12,9 @@ $(document).ready(() => {
     // GET endpoint stats
     const getEndpointStats = () => {
         const XHTTP = new XMLHttpRequest();
-        XHTTP.open("GET", ROOT + "admin" + API_KEY, true)
-        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.open("GET", ROOT + "admin" + API_KEY, true);
         XHTTP.send();
         XHTTP.onreadystatechange = () => {
-            console.log(XHTTP.readyState);
             if (XHTTP.readyState == 4 && XHTTP.status == 200) {
                 const ROWS = JSON.parse(XHTTP.responseText);
                 for (let i = 0; i < ROWS.length; i++) {
