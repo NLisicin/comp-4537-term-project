@@ -21,7 +21,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./index.html">Browse</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item text-nowrap">
                         <a class="nav-link active" aria-current="page" href="./addItem.html">Add an Item</a>
                     </li>
                     <li class="nav-item">
@@ -56,31 +56,31 @@
             <form id="new-movie-form" method="POST">
                 <div class="mb-3">
                     <label for="input-title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="input-title" name="title">
+                    <input type="text" class="form-control" id="input-title" name="title" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-director" class="form-label">Director</label>
-                    <input type="text" class="form-control" id="input-director" name="director">
+                    <input type="text" class="form-control" id="input-director" name="director" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-writer" class="form-label">Writer</label>
-                    <input type="text" class="form-control" id="input-writer" name="writer">
+                    <input type="text" class="form-control" id="input-writer" name="writer" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-date" class="form-label">Release Date</label>
-                    <input type="text" class="form-control" id="input-date" name="release_date">
+                    <input type="text" class="form-control" id="input-date" name="release_date" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-category" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="input-category" name="category">
+                    <input type="text" class="form-control" id="input-category" name="category" required>
                 </div>
                 <div class="mb-3">
                     <label for="runinput-time" class="form-label">Runtime</label>
-                    <input type="text" class="form-control" id="input-runtime" name="runtime">
+                    <input type="text" class="form-control" id="input-runtime" name="runtime" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-description" class="form-label">Description</label>
-                    <textarea type="text" class="form-control" id="input-description" name="desc" rows="3"></textarea>
+                    <textarea type="text" class="form-control" id="input-description" name="desc" rows="3" required></textarea>
                 </div>
                 <button id="movie-submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -91,23 +91,23 @@
             <form id="new-show-form" method="POST">
                 <div class="mb-3">
                     <label for="input-title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="input-title" name="title">
+                    <input type="text" class="form-control" id="input-title" name="title" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-director" class="form-label">Director</label>
-                    <input type="text" class="form-control" id="input-director" name="director">
+                    <input type="text" class="form-control" id="input-director" name="director" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-date" class="form-label">Release Date</label>
-                    <input type="text" class="form-control" id="input-date" name="release_date">
+                    <input type="text" class="form-control" id="input-date" name="release_date" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-seasons" class="form-label">Seasons</label>
-                    <input type="text" class="form-control" id="input-seasons" name="seasons">
+                    <input type="text" class="form-control" id="input-seasons" name="seasons" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-description" class="form-label">Description</label>
-                    <textarea type="text" class="form-control" id="input-description" name="desc" rows="3"></textarea>
+                    <textarea type="text" class="form-control" id="input-description" name="desc" rows="3" required></textarea>
                 </div>
                 <button id="show-submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -118,19 +118,19 @@
             <form id="new-game-form" method="POST">
                 <div class="mb-3">
                     <label for="input-title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="input-title" name="title">
+                    <input type="text" class="form-control" id="input-title" name="title" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-creator" class="form-label">Creator</label>
-                    <input type="text" class="form-control" id="input-creator" name="creator">
+                    <input type="text" class="form-control" id="input-creator" name="creator" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-date" class="form-label">Release Date</label>
-                    <input type="text" class="form-control" id="input-date" name="release_date">
+                    <input type="text" class="form-control" id="input-date" name="release_date" required>
                 </div>
                 <div class="mb-3">
                     <label for="input-description" class="form-label">Description</label>
-                    <textarea type="text" class="form-control" id="input-description" name="desc" rows="3"></textarea>
+                    <textarea type="text" class="form-control" id="input-description" name="desc" rows="3" required></textarea>
                 </div>
                 <button id="game-submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -138,6 +138,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
         <script src="./js/utils.js"></script>
         <script src="./js/addItem.js"></script>
 </body>

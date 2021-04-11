@@ -102,6 +102,8 @@ $(document).ready(() => {
                 $("#item").on("click", "#delete-button", () => deleteItem(category, id));
                 $("#new-review-form-card").show();
                 buildReviews(category, id);
+            } else if (XHTTP.readyState == 4 && XHTTP.status == 404) {
+                $("#item").append("Invalid item ID.");
             }
         }
     }
