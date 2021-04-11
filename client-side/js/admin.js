@@ -1,90 +1,58 @@
-$(document).ready(function () {
-    const ROOT = "https://rachellaurat.com/api/v1/";
-    const CATEGORIES = {
-        "Movies": "movies",
-        "TV Shows": "shows",
-        "Video Games": "games"
+$(document).ready(() => {
+
+    // Build table row element from row data
+    const buildRow = (method, endpoint, count) => {
+        return "<tr>" +
+            "   <th scope='row'>" + method + "</th>" +
+            "   <td>" + endpoint + "</td>" +
+            "   <td>" + count + "</td>" +
+            "</tr>";
     }
 
-    function buildMovieForm() {
-        const form = [
-            "<form method='POST' action='/movie'>",
-            "   <div class='mb-3'>",
-            "      <label for='input-title' class='form-label'>Title</label>",
-            "      <input type='text' class='form-control' id='input-title' name='title'>",
-            "   </div>",
-            "   <div class='mb-3'>",
-            "      <label for='input-director' class='form-label'>Director</label>",
-            "      <input type='text' class='form-control' id='input-director' name='director'>",
-            "   </div>",
-            "   <div class='mb-3'>",
-            "      <label for='input-writer' class='form-label'>Writer</label>",
-            "      <input type='text' class='form-control' id='input-writer' name='writer'>",
-            "   </div>",
-            "   <div class='mb-3'>",
-            "      <label for='input-date' class='form-label'>Release Date</label>",
-            "      <input type='text' class='form-control' id='input-date' name='date'>",
-            "   </div>",
-            "   <div class='mb-3'>",
-            "      <label for='input-category' class='form-label'>Category</label>",
-            "      <input type='text' class='form-control' id='input-category' name='category'>",
-            "   </div>",
-            "   <div class='mb-3'>",
-            "      <label for='runinput-time' class='form-label'>Runtime</label>",
-            "      <input type='text' class='form-control' id='input-runtime' name='runtime'>",
-            "   </div>",
-            "   <div class='mb-3'>",
-            "      <label for='input-description' class='form-label'>Description</label>",
-            "      <textarea type='text' class='form-control' id='input-description' name='description' rows='3'></textarea>",
-            "   </div>",
-            "   <button type='submit' class='btn btn-primary'>Submit</button>",
-            "</form>"
-        ].join("\n");
-        return form;
-    }
-
-    function buildForm(category) {
-        $("#new-item-form").empty();
-        switch (category) {
-            case "movies":
-                $("#new-item-form").append(buildMovieForm());
-        }
-    }
-
-    function buildRow(method, endpoint, count) {
-        const row = [
-            "<tr>",
-            "   <th scope='row'>" + method + "</th>",
-            "   <td>" + endpoint + "</td>",
-            "   <td>" + count + "</td>",
-            "</tr>"
-        ].join("\n");
-        return row;
-    }
-
-    function getEndpointStats() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("GET", ROOT + "admin", true)
-        xhttp.send();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                const rows = JSON.parse(xhttp.responseText);
-                for (const key of Object.keys(rows)) {
-                    const row = rows[key];
+    // GET endpoint stats
+    const getEndpointStats = () => {
+        const XHTTP = new XMLHttpRequest();
+        XHTTP.open("GET", ROOT + "admin" + API_KEY, true)
+        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.send();
+        XHTTP.onreadystatechange = () => {
+            console.log(XHTTP.readyState);
+            if (XHTTP.readyState == 4 && XHTTP.status == 200) {
+                const ROWS = JSON.parse(XHTTP.responseText);
+                for (let i = 0; i < ROWS.length; i++) {
+                    const ROW = ROWS[i];
                     $("#endpoint-table-body").append(buildRow(
-                        row["method"],
-                        row["endpoint"],
-                        row["count"]
+                        ROW["method"],
+                        ROW["endpoint"],
+                        ROW["count"]
                     ));
                 }
             }
         }
     }
 
-    getEndpointStats();
+    // POST authentication form
+    const authenticate = (form) => {
+        const XHTTP = new XMLHttpRequest();
+        XHTTP.open("POST", ROOT + "login" + API_KEY, true);
+        XHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        XHTTP.send(form.serialize());
+        XHTTP.onreadystatechange = () => {
+            if (XHTTP.readyState == 4 && XHTTP.status == 200) {
+                getEndpointStats();
+                form.hide();                
+                $("#endpoint-table").show();                
+            } else if (XHTTP.readyState == 4 && XHTTP.status == 401) {
+                alert("Invalid credentials");
+                form[0].reset();
+            }
+        }
+    }
 
-    $(".dropdown-menu li a").on("click", (value) => {
-        let category = CATEGORIES[value.target.innerHTML];
-        buildForm(category);
+    const FORM = $("#authentication-form");
+    
+    FORM.submit((e) => {
+        e.preventDefault();
+        authenticate(FORM);
     });
 });
