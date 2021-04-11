@@ -30,7 +30,7 @@ class HTTPError extends Error {
 const connection = mysql.createConnection({
     host: "45.79.138.240",
     user: "rachella_imdb",
-    password: "COMP4537",
+    password: "",
     database: "rachella_imdb",
     multipleStatements: true
 });
